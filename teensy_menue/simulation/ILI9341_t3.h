@@ -303,13 +303,19 @@ class ILI9341_t3 : public Print
 	uint16_t measureTextHeight(const char* text, int chars = 0);
 	int16_t strPixelLen(char * str);
     void setParent(wdgGraph* pParent) { m_pParent = pParent; }
- protected:
+    void setClipFrame(int16_t x, int16_t y, int16_t w, int16_t h) { _clipX = x; _clipY = y; _clipW = w; _clipH = h; }
+
+protected:
         unsigned long _clock = ILI9341_SPICLOCK;
 	int16_t _width, _height; // Display w/h as modified by current rotation
 	int16_t  cursor_x, cursor_y;
 	uint16_t textcolor, textbgcolor;
 	uint8_t textsize, rotation;
-	boolean wrap; // If set, 'wrap' text at right edge of display
+    int16_t _clipX = 0;
+    int16_t _clipY = 0;
+    int16_t _clipW = 320;
+    int16_t _clipH = 240;
+    boolean wrap; // If set, 'wrap' text at right edge of display
 	const ILI9341_t3_font_t *font;
 
   	uint8_t  _rst;
